@@ -53,7 +53,8 @@ reduceLeft f (h :| t) = foldLeft f h t
 -- Elegance: 0.5 marks
 -- Total: 3
 headOr :: List a -> a -> a
-headOr = error "todo"
+headOr Nil x = x
+headOr (x :| xs) _ = x
 
 -- Exercise 2
 -- Relative Difficulty: 2
@@ -62,7 +63,7 @@ headOr = error "todo"
 -- Elegance: 0.5 marks
 -- Total: 4
 sum :: List Int -> Int
-sum = error "todo"
+sum = foldRight (+) 0
 
 -- Exercise 3
 -- Relative Difficulty: 2
@@ -71,7 +72,7 @@ sum = error "todo"
 -- Elegance: 0.5 marks
 -- Total: 4
 length :: List a -> Int
-length = error "todo"
+length = foldLeft (\acc _ -> acc+1) 0
 
 -- Exercise 4
 -- Relative Difficulty: 5
@@ -80,7 +81,8 @@ length = error "todo"
 -- Elegance: 1.5 marks
 -- Total: 7
 map :: (a -> b) -> List a -> List b
-map = error "todo"
+map _ Nil = Nil
+map f (x :| xs) = f x :| map f xs
 
 -- Exercise 5
 -- Relative Difficulty: 5
@@ -89,7 +91,7 @@ map = error "todo"
 -- Elegance: 1 mark
 -- Total: 7
 filter :: (a -> Bool) -> List a -> List a
-filter = error "todo"
+filter f = foldLeft (\acc n -> if f n then n :| acc else acc) Nil
 
 -- Exercise 6
 -- Relative Difficulty: 5
@@ -98,7 +100,7 @@ filter = error "todo"
 -- Elegance: 1 mark
 -- Total: 7
 append :: List a -> List a -> List a
-append = error "todo"
+append xs ys = foldRight (:|) ys xs
 
 -- Exercise 7
 -- Relative Difficulty: 5
